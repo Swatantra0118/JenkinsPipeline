@@ -57,22 +57,22 @@ pipeline {
     //         sh "trivy image ${IMAGE_NAME}"
     //     }
     // }
-    // stage('Run Docker Container'){
-    //     steps{
-    //         script{
-    //               // Stop and remove the existing container if it exists
-    //               sh 'docker rm -f jenkinsPipeLineDemo || true'
-    //               docker.image("${IMAGE_NAME}:${IMAGE_TAG}").pull()
-    //               //Got the error here - Administrators can decide whether to approve or reject this signature.
-    //               // def myContainer = docker.container('jenkinsPipeLineDemo').withRun('-p 1000:80') 
-    //         }
-    //     }
-    //     post {
-    //         always {
-    //           // Run the Docker container with port mapping
-    //           sh 'docker run -d -p 1000:80 --name jenkinsPipeLineDemo ${IMAGE_NAME}:${IMAGE_TAG}'
-    //         }
-    //     }
-    // }
+    stage('Run Docker Container'){
+        steps{
+            script{
+                  // Stop and remove the existing container if it exists
+                  sh 'docker rm -f jenkinsPipeLineDemo || true'
+                  docker.image("${IMAGE_NAME}:${IMAGE_TAG}").pull()
+                  //Got the error here - Administrators can decide whether to approve or reject this signature.
+                  // def myContainer = docker.container('jenkinsPipeLineDemo').withRun('-p 1000:80') 
+            }
+        }
+        post {
+            always {
+              // Run the Docker container with port mapping
+              sh 'docker run -d -p 1000:80 --name jenkinsPipeLineDemo ${IMAGE_NAME}:${IMAGE_TAG}'
+            }
+        }
+    }
   }
 }

@@ -19,7 +19,7 @@ pipeline {
   stages {
     stage('Git Checkout') {
       steps {
-        git branch: 'main', url: 'https://github.com/Swatantra0118/DevOps-Pipeline.git'  
+        git branch: 'master', url: 'https://github.com/Swatantra0118/JenkinsPipeline.git'  
       }
     }
     // stage('OWASP Dependency Check') {

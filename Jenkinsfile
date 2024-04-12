@@ -22,6 +22,20 @@ pipeline {
         git branch: 'master', url: 'https://github.com/Swatantra0118/JenkinsPipeline.git'  
       }
     }
+
+    stage('Dotnet Build') {
+            agent {
+                docker {
+                     image 'mcr.microsoft.com/dotnet/sdk:7.0'
+                     args '--user root' 
+                     reuseNode true
+                }
+            }
+            steps {
+                sh 'dotnet build "$WORKSPACE/JenkinsPipelineDemo.sln" --configuration Release'
+                sh 'echo "Into the Build Stage"'
+            }
+        }
     // stage('OWASP Dependency Check') {
     //   steps {
     //     dependencyCheck additionalArguments: ' --scan ./ ', odcInstallation: 'Dep-Check'
